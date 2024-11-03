@@ -2,6 +2,7 @@ const userModel = require("../model/auth.model")
 const bcrypt = require('bcrypt')
 const generateToken = require("../utils/generateToken")
 const authSignup = async (req, res) => {
+    console.log("hoiii")
     try { 
         const { username, email, password, fullname } = req.body
         const validateEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -54,6 +55,7 @@ const authLogin = async (req, res) => {
         res.status(500).json({ success: true, error: "internal server error" })
     }
 }
+
 const authLogout =  async(req, res) => {
     try {
         res.cookie("jwt","",{maxAge:0})
@@ -62,6 +64,7 @@ const authLogout =  async(req, res) => {
         res.status(500).json({ success: true, error: "internal server error" })
     }
 }
+
 const getMe =async (req, res) => {
     try {
         const user = await userModel.findOne({_id:req.user._id}).select("-password")
@@ -74,6 +77,7 @@ const getMe =async (req, res) => {
         res.status(500).json({ success: true, error: "internal server error" })
     }
 }
+
 const authResetPassword = (req, res) => {
     try {
         res.cookie("jwt","",{maxAge:0})

@@ -20,16 +20,18 @@ const userSchema = mongoose.Schema({
         required: [true, "password required"],
 
     },
-    followers: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "user",
-        // default: []
-    },
-    following: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "user",
-        // default: []
-    },
+    followers: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "user",
+        },
+    ],
+    following: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "user",
+        },
+    ],
     profileImg: {
         type: String,
         default: ""
@@ -45,6 +47,6 @@ const userSchema = mongoose.Schema({
         type: String,
         default: ""
     }
-},{timestamps: true })
-const userModel=mongoose.model("user",userSchema)
-module.exports=userModel
+}, { timestamps: true })
+const userModel = mongoose.model("user", userSchema)
+module.exports = userModel
